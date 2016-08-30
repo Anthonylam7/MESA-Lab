@@ -1,0 +1,36 @@
+<Car>:
+	size_hint: None, None
+	pos: self.currPos
+	size: 40,100
+	
+	canvas.before:
+		PushMatrix
+		Rotate:
+			angle: self.angle
+			origin: self.center
+			axis: 0,0,1
+		Color:
+			rgba: [1]*4
+		Rectangle:
+			size: self.size
+			pos: self.currPos
+		Color:
+			rgba: [1,0,0,1]
+		Rectangle:
+			pos: self.x + self.width * 0.1 , self.y +self.height*.05
+			size: self.width*0.3, self.height/18.0
+		Color:
+			rgba: [1,0,0,1]
+		Rectangle:
+			pos: self.x + self.width * 0.6 , self.y +self.height*.05
+			size: self.width*0.3, self.height/18.0
+			
+		Color:
+			rgba: [0,0.3,1,0.5]
+		Rectangle:
+			pos: self.x + self.width * 0.1 , self.y + self.height*0.6
+			size: self.width*0.8, self.height/3.0
+	canvas.after:
+		PopMatrix
+	
+	
