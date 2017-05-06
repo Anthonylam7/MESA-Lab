@@ -14,6 +14,9 @@ from kivy.clock import Clock
         1. Uses a grid where successors and predecessor relationships are implicitly neighboring cells.
         2. Uses a graph to map spatial and relational data to optimize number of iterations required to reach a solution
     This implementation uses the kivy framework to visually display the process.
+
+    Current the constructor only supports the creation of randomly generated grids base on a dimensions tuple parameter
+
 '''
 
 
@@ -48,6 +51,11 @@ class Grid(FloatLayout):
 
 
     def update(self, *args):
+        '''
+        Displays the current data onto the kivy canvas
+        :param args: used as place holder for args provided by Clock object
+        :return:
+        '''
         self.drawGrid()
         if self._obstacles:
             self.drawObstacles()
@@ -55,6 +63,13 @@ class Grid(FloatLayout):
             self.drawObjective()
 
     def drawGrid(self):
+        '''
+        Draws a grid based on the dimensions attribute and the bounding window
+
+        Note:: At the time of writing this, there is a bug when maximizing the screen which causes the grid
+                to not render properly
+        :return:
+        '''
         div_col, div_row = Window.width/self.numCols, Window.height/self.numRows
         with self.canvas.before as c:
             self.canvas.before.clear()
@@ -65,6 +80,11 @@ class Grid(FloatLayout):
                 Line(points=[0, rows*div_row, self.width, rows*div_row])
 
     def drawObstacles(self):
+        '''
+        Draws obstacles as boxes
+        To DO:: use nonlocal on div_xx since this function is internally called by the update method
+        :return:
+        '''
         div_col, div_row = Window.width / self.numCols, Window.height / self.numRows
         with self.canvas:
             self.canvas.clear()
@@ -73,6 +93,10 @@ class Grid(FloatLayout):
                 Rectangle(pos=(x*div_col+0.5,y*div_row+0.5), size=(div_col-1,div_row-1))
 
     def drawObjective(self):
+        '''
+        Same as drawObstacles
+        :return:
+        '''
         div_col, div_row = Window.width / self.numCols, Window.height / self.numRows
         with self.canvas.after:
             #self.canvas.after.clear()
@@ -82,17 +106,42 @@ class Grid(FloatLayout):
 
 
     def setStart(self, coordinates):
-        # if coordinates in self._obstacles:
-        #     return
-        self._start = (coordinates)
+        '''
+        Setter for starting location
+        :param coordinates: tuple
+        :return:
+        '''
+
+        if 0 <= coordinates[0] <= self.numCols and 0 <= coordinates <= self.numRows:
+            if coordinates not in self._obstacles:
+                self._start = (coordinates)
+            else:
+                raise ValueError("Invalid start loc. Point is already an obstacle!")
+
+        else:
+            raise ValueError("Input coordinates are out of bounds!")
 
     def setDestination(self, coordinates):
-        # if coordinates in self._obstacles:
-        #     return
-        self._target = (coordinates)
-
+        '''
+        Setter for target location
+        :param coordinates: tuple
+        :return:
+        '''
+        if 0 <= coordinates[0] <= self.numCols and 0 <= coordinates <= self.numRows:
+            if coordinates not in self._obstacles:
+                self._target = (coordinates)
+            else:
+                raise ValueError("Invalid destination. Point is already an obstacle!")
+        else:
+            raise ValueError("Input coordinates are out of bounds!")
 
     def generateObstacles(self, numObstacles, *args):
+        '''
+        Randomly generate random obstacles on grid
+        :param numObstacles: int indicating number of random obstacles
+        :param args:
+        :return:
+        '''
         if self._obstacles == None:
             self._obstacles.extend([(randint(0,self.numCols),randint(0,self.numRows)) for i in range(numObstacles)])
         else:
@@ -101,6 +150,14 @@ class Grid(FloatLayout):
     ''' ********************************* Below contain D* Lite operations ***************************************** '''
 
     def initialize(self):
+        '''
+        Initializes the grid according to D* Lite implementation:
+            1. sets the g and rhs for every node to _INFINITY parameter.
+            2. sets the rhs of goal to 0
+            3. add goal to the open set
+
+        :return:
+        '''
         for col in range(self.numCols):
             for row in range(self.numRows):
                 self._gVal[(col,row)] = self._INFINITY
@@ -109,6 +166,12 @@ class Grid(FloatLayout):
         self._open.put((self.calculateKeys(self._target), self._target))
 
     def cost(self, u, v):
+        '''
+
+        :param u: pos tuple of inital node
+        :param v: pos tuple of destination node
+        :return: 1 or 1.4
+        '''
         try:
             x0,y0 = u
             x1, y1 = v
@@ -122,9 +185,16 @@ class Grid(FloatLayout):
         except Exception as e:
             print(e)
             print('Inputs were: u = {}, and v = {}'.format(u,v))
-            return -1
+            raise
 
     def heuristic(self, u):
+        '''
+        Using L1 distance since movement is discrete
+
+        Note:: L1 norm implies non unique paths
+        :param u: pos tuple
+        :return: L1 distance
+        '''
         try:
             return abs(u[0]-self._target[0]) + abs(u[1]-self._target[1])
         except:
@@ -132,12 +202,24 @@ class Grid(FloatLayout):
             return -1
 
     def _getNeighbor(self, u):
+        '''
+        finds the adjacent neighbors to a node that are not obstacles
+        :param u: pos tuple for node u
+        :return:
+        '''
         x,y = u
         possibleNeighbor = [(col, row) for col in range(x-1,x+2) for row in range(y-1, y+2) if (row!=x or col!=y)]
         possibleNeighbor = [(x,y) for x,y in possibleNeighbor if (0<=x<self.numCols and 0<=y<self.numRows)]
         return [x for x in possibleNeighbor if x not in self._obstacles]
 
     def _getPredecessor(self, u):
+        '''
+        Locate predecessors from predecessor LUT
+        sets all neighbors of u to be predecessors if predecessors are not found
+            also sets u to be the successors to those neighbors because the grid is bi-directional
+        :param u:
+        :return:
+        '''
         if u not in self._predecessor.keys():
             neighbors = self._getNeighbor(u)
             self._predecessor[u] = neighbors
@@ -157,12 +239,29 @@ class Grid(FloatLayout):
         pass
 
     def updateVertex(self, u):
+        '''
+        sets the rhs u to the best possible rhs
+        the result of this will be a potential gradient that can be used to determine the path
+
+        if u is an inconsistent node it is added to the open set for processing
+        :param u: pos tuple
+        :return:
+        '''
         if u != self._target:
             self._rhs[u] = min([self.cost(u,s) + self._gVal[s] for s in self._successor[u]])
         if self._gVal[u] != self._rhs[u]:
             self._open.put((self.calculateKeys(u),u))
 
     def computeShortestPath(self):
+        '''
+        main computation in D* Lite algorithm.
+        Main loop is a BFS using priority to prune and determine the best expansion each iteration
+            each loop a node is selected and check for consistency:
+                if overconsistent then just set g = rhs and expand
+                elif inconsistent recalculate and expand
+        an extra conditional clause is added in the event that no possible path is found and the queue becomes empty
+        :return:
+        '''
         startKey = self.calculateKeys(self._start)
         try:
             while self._open.queue[0][0] < startKey or self._rhs[self._start] != self._gVal[self._start]:
@@ -182,6 +281,11 @@ class Grid(FloatLayout):
             exit(1)
 
     def calculateKeys(self, u):
+        '''
+        Important in the case where a obstacle is newly found which causes data to be inconsistent
+        :param u: pos tuple
+        :return:
+        '''
         #print('calculaing keys', u)
         try:
             return min(self._gVal[u], self._rhs[u])
@@ -190,6 +294,12 @@ class Grid(FloatLayout):
             exit()
 
     def execute(self):
+        '''
+        Quick call to demonstrate algorithm using kivy canvas
+        The movement loop has been relocated to a schedule event callback in order to visually animate the
+        path traversal.
+        :return:
+        '''
         self.initialize()
         self.computeShortestPath()
         if self._gVal[self._start] == self._INFINITY:
