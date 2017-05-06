@@ -11,7 +11,10 @@ Currently there two ongoing projects:
 1. Kivy python3
     Please visit [kivy](kivy.org)<br>
     ` apt-get install python3-kivy `
-2. numpy and scipy
+2. numpy and scipy [numpy](numpy.org "Numpy") [Scipy](Scipy.org "Scipy")
+
+Note:: Anaconda is a useful platform to have that contain many modules helpful in data science
+[Anaconda](https://www.continuum.io/ "Anaconda")
 
 
 ## Hardware:
