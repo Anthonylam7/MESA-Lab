@@ -1,9 +1,15 @@
-# MESA-Lab
+# MESA-Lab @ UMD
+The goal of the MESA lab is to provide education for topics related to renewable energy.
+The core language being used is Python 3
 
-Contains relevant files for implementation of a solar powered vehicle via the Raspberry Pi 3 B
+Currently there two ongoing projects:
+1. The design of an education cross platform application for visual representation of related topics
+2. Design for control of an adult-sized rover.
 
-#Package includes:
-Kinect sensory logic
-Android App widgets for implenting a controller.
-Raspberry Pi code for internal operations.
-Various widgets for learning about renewable energy
+
+# Software dependencies:
+1. Kivy python3
+Please visit kiv.org
+| apt-get install python3-kivy |
+2. numpy and scipy
+
