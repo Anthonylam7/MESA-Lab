@@ -13,10 +13,10 @@ Currently there two ongoing projects:
     ` apt-get install python3-kivy `
 2. numpy and scipy [numpy](numpy.org "Numpy") [Scipy](Scipy.org "Scipy")
 
-Note:: Anaconda is a useful platform to have that contain many modules helpful in data science
+Note:: Anaconda is a useful platform to have that contain many modules helpful in data science <br>
 [Anaconda](https://www.continuum.io/ "Anaconda")
 
 
 ## Hardware:
 * Raspberry Pi 3
-* Sunfounder Video Car [link] (https://www.amazon.com/SunFounder-Raspberry-Robotics-Electronic-Included/dp/B014KK89BW/ref=sr_1_1?ie=UTF8&qid=1494105927&sr=8-1&keywords=sunfounder+video+car)
+* Sunfounder Video Car [Amazon link] (https://www.amazon.com/SunFounder-Raspberry-Robotics-Electronic-Included/dp/B014KK89BW/ref=sr_1_1?ie=UTF8&qid=1494105927&sr=8-1&keywords=sunfounder+video+car "Amazon link")
