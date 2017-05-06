@@ -19,4 +19,4 @@ Note:: Anaconda is a useful platform to have that contain many modules helpful i
 
 ## Hardware:
 * Raspberry Pi 3
-* Sunfounder Video Car [Amazon link] (https://www.amazon.com/SunFounder-Raspberry-Robotics-Electronic-Included/dp/B014KK89BW/ref=sr_1_1?ie=UTF8&qid=1494105927&sr=8-1&keywords=sunfounder+video+car "Amazon link")
+* Sunfounder Video Car [Amazon link](https://www.amazon.com/SunFounder-Raspberry-Robotics-Electronic-Included/dp/B014KK89BW/ref=sr_1_1?ie=UTF8&qid=1494105927&sr=8-1&keywords=sunfounder+video+car "Amazon link")
