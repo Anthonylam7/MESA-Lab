@@ -9,7 +9,7 @@ Currently there two ongoing projects:
 
 # Software dependencies:
 1. Kivy python3
-    Please visit [kivy](kivy.org)
+    Please visit [kivy](kivy.org)<b>
     ` apt-get install python3-kivy `
 2. numpy and scipy
 
