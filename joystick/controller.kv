@@ -1,0 +1,36 @@
+<ControlStick>
+	size_hint: None, None
+	size: 50, 50
+	canvas:
+		Color:
+			rgba: [.3, .3, .3, 0.7]
+			
+		Ellipse:
+			size: self.size
+			pos: (self.x - self.width/2.0 , self.y - self.height/2.0)
+			
+		Color:
+			rgba: [0]*3 + [1]
+		Ellipse:
+			size: self.width * 0.92, self.height * 0.92
+			pos: (self.x - self.width* 0.46 , self.y - self.height*0.46)
+			
+			
+<Joystick>
+	size_hint: None,None
+
+	
+	canvas:
+		Color:
+			rgba: [.8]*3 + [0.14]
+		
+		Ellipse:
+			size: self.size
+			pos: self.pos
+
+
+		Color:
+			rgba: [0]*3 + [1]
+		Ellipse:
+			size: self.width * 0.92, self.height * 0.92
+			pos: (self.x + self.width* 0.04 , self.y + self.height*0.04)		
