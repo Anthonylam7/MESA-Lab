@@ -1,0 +1,8 @@
+prefix=/home/anthony/PycharmProjects/MESA-Lab/RaspberryPi/ROS_Ws/install
+
+Name: sunfounder_rover
+Description: Description of sunfounder_rover
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/anthony/PycharmProjects/MESA-Lab/RaspberryPi/ROS_Ws/install/lib 
+Requires: 
