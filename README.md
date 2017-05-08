@@ -13,7 +13,7 @@ Currently there two ongoing projects:
     ` apt-get install python3-kivy `
 2. numpy and scipy [numpy](numpy.org "Numpy") [Scipy](Scipy.org "Scipy")
 3. ROS<br>
-    Visit [ROS](ros.org)
+    -Visit [ROS](ros.org)
 4. OpenCV 3.0 [OpenCV](opencv.org)
 
 Note:: Anaconda is a useful platform to have that contain many modules helpful in data science <br>
