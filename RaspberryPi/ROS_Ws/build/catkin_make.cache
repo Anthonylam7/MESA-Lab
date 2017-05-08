@@ -1,0 +1,2 @@
+sunfounder_rover
+-DCATKIN_DEVEL_PREFIX=/home/anthony/PycharmProjects/MESA-Lab/RaspberryPi/ROS_Ws/devel -DCMAKE_INSTALL_PREFIX=/home/anthony/PycharmProjects/MESA-Lab/RaspberryPi/ROS_Ws/install -G Unix Makefiles
