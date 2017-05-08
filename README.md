@@ -1,6 +1,6 @@
 # MESA-Lab @ UMD
 The goal of the MESA lab is to provide education for topics related to renewable energy.
-The core language being used is Python 3
+The core language being used is Python 2.7, 3.5 and C++
 
 Currently there two ongoing projects:
 1. The design of an education cross platform application for visual representation of related topics
@@ -12,6 +12,9 @@ Currently there two ongoing projects:
     Please visit [kivy](kivy.org)<br>
     ` apt-get install python3-kivy `
 2. numpy and scipy [numpy](numpy.org "Numpy") [Scipy](Scipy.org "Scipy")
+3. ROS
+    Visit [ROS](ros.org)
+4. OpenCV 3.0 [OpenCV](opencv.org)
 
 Note:: Anaconda is a useful platform to have that contain many modules helpful in data science <br>
 [Anaconda](https://www.continuum.io/ "Anaconda")
