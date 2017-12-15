@@ -8,8 +8,8 @@ Currently there two ongoing projects:
 
 # Sample image of the rover
 Image was rendered via blender.
-![Front View](VehicleV3RenderFront.png "Title1")
-![Side View](VehicleV3RenderSide.png "Title2")
+![Front View](VehicleV3RenderFront.png "Front View")
+![Side View](VehicleV3RenderSide.png "Side View")
 
 ## Software dependencies:
 1. Kivy python3
