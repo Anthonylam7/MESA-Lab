@@ -1,0 +1,36 @@
+<AngleDemo>:
+    Label:
+        text: "Pitch"
+        font_size: root.height/15
+        size_hint: (None, None)
+        size: self.texture_size
+        pos_hint: {"x": 0.1, "y": 0.2}
+        outline_color: (0.9, 0.8, 0.0)
+        outline_width: 1
+
+    Label:
+        text: "Yaw"
+        font_size: root.height/15
+        size_hint: (None, None)
+        size: self.texture_size
+        pos_hint: {"x": 0.45, "y": 0.2}
+        outline_color: (0.9, 0.8, 0.0)
+        outline_width: 1
+
+    Label:
+        text: "Roll"
+        font_size: root.height/15
+        size_hint: (None, None)
+        size: self.texture_size
+        pos_hint: {"x": 0.77, "y": 0.2}
+        outline_color: (0.9, 0.8, 0.0)
+        outline_width: 1
+
+    Label:
+        text: "Flux: " + str(root.flux)[:4] + "%"
+        font_size: root.height/15
+        size_hint: (None, None)
+        size: self.texture_size
+        pos_hint: {"x": 0.07, "y": 0.4}
+        outline_color: (0.9, 0.8, 0.0)
+        outline_width: 1

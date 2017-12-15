@@ -1,0 +1,118 @@
+<Introduction>:
+    canvas.before:
+        Color:
+            rgba: (0.7, 0, 0, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            size: self.width/4, self.height/4
+            pos: self.x + self.width*3/4, self.y
+            source: "./assets/images/UMD_logo.png"
+
+<PhotoElectric>:
+    canvas.before:
+        Color:
+            rgba: (0.3, 0.3, 0.3, 1)
+        Rectangle:
+            size: self.width*0.52, self.height
+
+
+<Lamp>:
+    pos_hint: {"x": 0.1, "y": 0.7}
+    size_hint: 0.3, 0.3
+    allow_stretch: True
+    keep_ratio: True
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        PushMatrix:
+        Rotate:
+            axis: (0, 0, 1)
+            origin: self.x + self.width/2, self.y + self.height/2
+            angle: 180
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "./assets/images/lightbulb.png"
+        PopMatrix:
+
+
+
+<Light>:
+    canvas:
+        Rectangle:
+            size: Window.size
+
+<PEPanel>:
+    pos_hint: {"x": 0.05, "y": 0.6}
+    size_hint: 0.4, 0.05
+    allow_stretch: True
+    keep_ratio: False
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        PushMatrix:
+        Rotate:
+            axis: (0, 0, 1)
+            origin: self.x + self.width/2, self.y + self.height/2
+            angle: 180
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            #source: "./assets/images/metal_panel.png"
+        PopMatrix:
+    Label:
+        color: [0, 0, 0, 1]
+        text: "Metal"
+        font_size: Window.height*0.05
+        size: Window.width*0.4, Window.height*0.2
+        pos: Window.width*0.05, Window.height*0.52
+
+
+<EnergyParticle>:
+    size: Window.size
+    size_hint: None, None
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<VoltagePlot>:
+    size_hint: (.5, 0.5)
+    background_color: [0.6, 0.6, 0.6, 1]
+
+
+<PNJunction>:
+    size_hint: (0.5, 0.33)
+    pos_hint: {"x": 0.15, "y": 0.3}
+    canvas:
+        Color:
+            rgba: (0.7, 0, 0, 1)
+        Rectangle:
+            size: (self.width/2, self.height)
+            pos: self.pos
+        Color:
+            rgba: (0, 0, 0.7, 1)
+        Rectangle:
+            size: (self.width/2, self.height)
+            pos: (self.x + self.width/2, self.y)
+
+    Label:
+        text: "P"
+        font_size: root.height/3
+        texture_size: (None, self.height)
+        pos: root.x, root.y + root.height
+
+    Label:
+        text: "N"
+        font_size: root.height/3
+        texture_size: (None, self.height)
+        pos: root.x + root.width-self.width, root.y + root.height
+
+<HelpButton>:
+    size_hint: (0.1, 0.1)
+    pos_hint: {'x':0.9, 'y':0.9}
+

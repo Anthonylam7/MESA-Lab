@@ -1,0 +1,28 @@
+#: import Window kivy.core.window.Window
+
+
+<BoldLabel>:
+    size_hint: None, None
+    size: self.texture_size
+    bold: True
+    font_size: Window.height * 0.1
+    color: (1, 0, 0, 0)
+
+
+<PlainLabel>:
+    size_hint: None, None
+    size: self.texture_size
+    font_size: Window.height * 0.15
+
+<TapToContinueLabel>:
+    size_hint: None, None
+    size: self.texture_size
+    font_size: Window.height * 0.1
+
+<IntroLabel>:
+    size_hint: None, None
+    text_size: Window.width, None
+    size: Window.size
+    halign: "center"
+    bold: True
+    font_size: Window.height * 0.05
