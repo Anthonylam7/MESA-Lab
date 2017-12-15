@@ -6,6 +6,9 @@ Currently there two ongoing projects:
 1. The design of an education cross platform application for visual representation of related topics
 2. Design for control of an adult-sized rover.
 
+# Sample image of the rover
+Image was rendered via blender.
+
 
 ## Software dependencies:
 1. Kivy python3
